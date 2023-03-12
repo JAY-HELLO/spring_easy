@@ -1,6 +1,8 @@
 package com.example.spring_easy;
 
+import com.example.spring_easy.discount.DiscountPolicy;
 import com.example.spring_easy.discount.FixDiscountPolicy;
+import com.example.spring_easy.member.MemberRepository;
 import com.example.spring_easy.member.MemberService;
 import com.example.spring_easy.member.MemberServiceImpl;
 import com.example.spring_easy.member.MemoryMemberRepository;
@@ -17,7 +19,7 @@ public class AppConfig {
         return new MemberServiceImpl(memberRepository());
     }
 
-    private MemoryMemberRepository memberRepository() {
+    private MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
 
@@ -25,7 +27,7 @@ public class AppConfig {
         return new OrderServiceImpl(discountPolicy(), memberRepository());
     }
 
-    private FixDiscountPolicy discountPolicy() {
+    private DiscountPolicy discountPolicy() {
         return new FixDiscountPolicy();
     }
 
