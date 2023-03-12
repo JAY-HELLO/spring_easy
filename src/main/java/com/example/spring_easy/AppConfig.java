@@ -14,11 +14,19 @@ public class AppConfig {
 
     // 생성자 주입 의존관계 주입 (DI dependency injection)
     public MemberService memberService(){
-        return new MemberServiceImpl(new MemoryMemberRepository());
+        return new MemberServiceImpl(memberRepository());
+    }
+
+    private MemoryMemberRepository memberRepository() {
+        return new MemoryMemberRepository();
     }
 
     public OrderService orderService(){
-        return new OrderServiceImpl(new FixDiscountPolicy(), new MemoryMemberRepository());
+        return new OrderServiceImpl(discountPolicy(), memberRepository());
+    }
+
+    private FixDiscountPolicy discountPolicy() {
+        return new FixDiscountPolicy();
     }
 
 }
