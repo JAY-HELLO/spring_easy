@@ -1,4 +1,4 @@
-package com.example.spring_easy;
+package com.example.spring_easy.member;
 
 import com.example.spring_easy.member.Grade;
 import com.example.spring_easy.member.Member;
