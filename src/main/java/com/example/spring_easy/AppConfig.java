@@ -9,26 +9,31 @@ import com.example.spring_easy.member.MemberServiceImpl;
 import com.example.spring_easy.member.MemoryMemberRepository;
 import com.example.spring_easy.order.OrderService;
 import com.example.spring_easy.order.OrderServiceImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /***
  * application 에 대한 환경설정을 이곳에서 다 해준다.
  */
+
+@Configuration
 public class AppConfig {
 
     // 생성자 주입 의존관계 주입 (DI dependency injection)
+    @Bean
     public MemberService memberService(){
         return new MemberServiceImpl(memberRepository());
     }
-
-    private MemberRepository memberRepository() {
+    @Bean
+    public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
-
+    @Bean
     public OrderService orderService(){
         return new OrderServiceImpl(discountPolicy(), memberRepository());
     }
-
-    private DiscountPolicy discountPolicy() {
+    @Bean
+    public DiscountPolicy discountPolicy() {
         return new RateDiscountPolicy();
     }
 
