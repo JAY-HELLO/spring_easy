@@ -5,6 +5,9 @@ import com.example.spring_easy.member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.autoconfigure.web.reactive.HttpHandlerAutoConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,5 +37,15 @@ public class SingletonTest {
         
         //same == 객체 인스턴스 비교
         //equal == 값 비교
+    }
+    @Test
+    @DisplayName("스프링 컨테이너와 싱글톤")
+    void springContainer(){
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        MemberService ms1 = ac.getBean("memberService",MemberService.class);
+        MemberService ms2 = ac.getBean("memberService",MemberService.class);
+        //스프링 없는 순수학 di 컨테이너 appConfig는 요청을 할때 마다 객체를 새로 생성한다. -> 메모리 낭비가 심하다
+        // 그러나 스프링 컨테니너는 싱글톤 의 장점과 단접을 잘 처리한 컨테이너를 제공함. 객체를 따로 생성하지 않음.
+        assertThat(ms1).isSameAs(ms2);
     }
 }
