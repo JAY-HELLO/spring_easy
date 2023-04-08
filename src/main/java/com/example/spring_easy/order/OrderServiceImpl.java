@@ -3,8 +3,11 @@ package com.example.spring_easy.order;
 import com.example.spring_easy.discount.DiscountPolicy;
 import com.example.spring_easy.member.Member;
 import com.example.spring_easy.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
     //private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -13,13 +16,14 @@ public class OrderServiceImpl implements OrderService{
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
 
     // DIP 를 지키기 위해 discountPolicy를 변경
-    private final DiscountPolicy discountPolicy;
-    private final MemberRepository memberRepository;
+    @Autowired private DiscountPolicy discountPolicy;
+    @Autowired private MemberRepository memberRepository;
 
+/*    @Autowired
     public OrderServiceImpl(DiscountPolicy discountPolicy, MemberRepository memberRepository) {
         this.discountPolicy = discountPolicy;
         this.memberRepository = memberRepository;
-    }
+    }*/
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice){

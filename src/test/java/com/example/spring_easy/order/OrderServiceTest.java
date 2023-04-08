@@ -1,10 +1,8 @@
 package com.example.spring_easy.order;
 
 import com.example.spring_easy.AppConfig;
-import com.example.spring_easy.member.Grade;
-import com.example.spring_easy.member.Member;
-import com.example.spring_easy.member.MemberService;
-import com.example.spring_easy.member.MemberServiceImpl;
+import com.example.spring_easy.discount.FixDiscountPolicy;
+import com.example.spring_easy.member.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,5 +32,17 @@ public class OrderServiceTest {
 
         //then
         Assertions.assertThat(order.getDiscountPrice()).isEqualTo(1000);
+    }
+
+    @Test
+    /**
+     * 필드주입 하지 말자.
+     */
+    void fieldInjectionTest(){
+        /*OrderServiceImpl orderService1 = new OrderServiceImpl();
+        orderService1.setMemberRepository(new MemoryMemberRepository());
+        orderService1.setDiscountPolicy(new FixDiscountPolicy());
+        orderService1.createOrder(1L,"itemA",10000);*/
+
     }
 }
