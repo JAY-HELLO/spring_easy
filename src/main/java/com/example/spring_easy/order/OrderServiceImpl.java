@@ -16,8 +16,8 @@ public class OrderServiceImpl implements OrderService{
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
 
     // DIP 를 지키기 위해 discountPolicy를 변경
-    @Autowired private DiscountPolicy discountPolicy;
-    @Autowired private MemberRepository memberRepository;
+    @Autowired private final DiscountPolicy discountPolicy;
+    @Autowired private final MemberRepository memberRepository;
 
     @Autowired
     public OrderServiceImpl(DiscountPolicy discountPolicy, MemberRepository memberRepository) {
