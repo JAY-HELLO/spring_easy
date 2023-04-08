@@ -19,11 +19,11 @@ public class OrderServiceImpl implements OrderService{
     @Autowired private DiscountPolicy discountPolicy;
     @Autowired private MemberRepository memberRepository;
 
-/*    @Autowired
+    @Autowired
     public OrderServiceImpl(DiscountPolicy discountPolicy, MemberRepository memberRepository) {
         this.discountPolicy = discountPolicy;
         this.memberRepository = memberRepository;
-    }*/
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice){
