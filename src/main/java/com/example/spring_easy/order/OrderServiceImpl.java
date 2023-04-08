@@ -16,14 +16,14 @@ public class OrderServiceImpl implements OrderService{
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
 
     // DIP 를 지키기 위해 discountPolicy를 변경
-    private final DiscountPolicy discountPolicy;
-    private final MemberRepository memberRepository;
+    @Autowired private DiscountPolicy discountPolicy;
+    @Autowired private MemberRepository memberRepository;
 
-    @Autowired
+/*    @Autowired
     public OrderServiceImpl(DiscountPolicy discountPolicy, MemberRepository memberRepository) {
         this.discountPolicy = discountPolicy;
         this.memberRepository = memberRepository;
-    }
+    }*/
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice){
