@@ -1,13 +1,17 @@
 package com.example.spring_easy.order;
 
+import com.example.spring_easy.annotation.MainDiscountPolicy;
 import com.example.spring_easy.discount.DiscountPolicy;
 import com.example.spring_easy.member.Member;
 import com.example.spring_easy.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 
 @Component
+//@RequiredArgsConstructor // final 이 붙은 변수의 생성자를 만들어준다.
 public class OrderServiceImpl implements OrderService{
 
     //private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -16,11 +20,14 @@ public class OrderServiceImpl implements OrderService{
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
 
     // DIP 를 지키기 위해 discountPolicy를 변경
-    @Autowired private final DiscountPolicy discountPolicy;
-    @Autowired private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public OrderServiceImpl(DiscountPolicy discountPolicy, MemberRepository memberRepository) {
+    private DiscountPolicy rateDiscountPolicy;
+
+   @Autowired
+    public OrderServiceImpl(@MainDiscountPolicy DiscountPolicy discountPolicy, MemberRepository memberRepository) {
         this.discountPolicy = discountPolicy;
         this.memberRepository = memberRepository;
     }
