@@ -1,6 +1,8 @@
 package com.example.spring_easy.lifecycle;
 
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 public class NetworkClient {
 
@@ -25,11 +27,13 @@ public class NetworkClient {
         System.out.println("close: " + url);
     }
 
+    @PostConstruct
     public void init(){
         System.out.println(" network client. afterpropertiesSet");
         connect();
         call("초기화 연결 메시지");
     }
+    @PreDestroy
     public void close(){
         System.out.println("NetworkClient.close");
         disconnect();
