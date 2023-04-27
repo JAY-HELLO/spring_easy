@@ -15,7 +15,7 @@ public class BeanLifeCycleTest {
         ac.close();
     }
     @Configuration
-    static class  LifeCycleConfig{
+    static class LifeCycleConfig{
         @Bean
         public  NetworkClient networkClient(){
             NetworkClient networkClient = new NetworkClient();
