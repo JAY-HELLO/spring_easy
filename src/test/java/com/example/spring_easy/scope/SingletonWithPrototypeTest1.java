@@ -1,7 +1,7 @@
 package com.example.spring_easy.scope;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -40,14 +40,11 @@ public class SingletonWithPrototypeTest1 {
 
     @Scope("singleton")
     static class ClientBean{
-        private final PrototypeBean prototypeBean; // 생성시점에 주입됨.
-
         @Autowired
-        public ClientBean(PrototypeBean prototypeBean) {
-            this.prototypeBean = prototypeBean;
-        }
+        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
 
         public int logic(){
+            PrototypeBean prototypeBean = prototypeBeanProvider.getObject(); //getObject가 호출될떄 그때 provider을 찾아준다.
             prototypeBean.addCount();
             return prototypeBean.getCount();
         }
